@@ -1,0 +1,32 @@
+# Compose fileのバージョン指定
+version: "3.9"
+
+# 立ち上げるコンテナを記述していく
+services:
+  # MySQLを動かすコンテナ
+  database:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # コンテナ名を指定
+    container_name: recursion-db
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./mysql/init:/docker-entrypoint-initdb.d
+      # トップディレクトリと同期
+      - ../:/workspace:cached
+      # ボリュームにマウントしデータを永続化する
+      - recursion-db-store:/var/lib/mysql
+    environment:
+      - TZ=Asia/Tokyo
+      - MYSQL_DATABASE=recursion-database
+      - MYSQL_USER=docker
+      - MYSQL_PASSWORD=docker
+      - MYSQL_ROOT_PASSWORD=rootpass
+
+# 使用するボリュームを指定
+volumes:
+  recursion-db-store:
+    name: recursion-db-store

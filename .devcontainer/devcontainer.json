@@ -1,0 +1,9 @@
+{
+    "name": "Docker-Database",
+    "dockerComposeFile": "docker-compose.yml",
+    // docker-compose.ymlファイル内のどのサービスがDev Containerであるかを示す
+    "service": "database",
+    // ワークスペースを指定
+    "workspaceFolder": "/workspace",
+    "remoteUser": "user01"
+}
