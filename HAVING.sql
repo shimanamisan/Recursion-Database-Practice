@@ -211,3 +211,27 @@ GROUP BY
     prefecture
 ORDER BY
     MIN(age);
+    
+# 課題3
+-- nickname が NULL 値ではないレコードを対象とする。
+-- 各都道府県ごとにデータを取得。
+-- 平均年齢が 20 歳以上の都道府県を対象とする。
+-- 表示カラムは、都道府県、最小年齢、平均年齢。
+-- 表示順は、最小年齢が低い順。
+SELECT * FROM users;
+
+SELECT
+    prefecture AS 都道府県
+    , MIN(age) AS 最小年齢
+    , AVG(age) AS 平均年齢
+FROM
+    users
+WHERE
+    nickname IS NOT NULL
+GROUP BY
+    prefecture
+HAVING
+    AVG(age) >= 20
+ORDER BY
+    AVG(age);
+    
